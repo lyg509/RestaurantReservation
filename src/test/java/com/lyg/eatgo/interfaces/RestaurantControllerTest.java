@@ -41,7 +41,7 @@ public class RestaurantControllerTest {
                         containsString("\"id\":1004")
                 ))
                 .andExpect(content().string(
-                                containsString("\"name\":\"Bob zip\"")
+                        containsString("\"name\":\"Bob zip\"")
                 ));
 
         mvc.perform(get("/restaurants/2020"))
@@ -50,7 +50,7 @@ public class RestaurantControllerTest {
                         containsString("\"id\":2020")
                 ))
                 .andExpect(content().string(
-                                containsString("\"name\":\"Cyber Food\"")
+                        containsString("\"name\":\"Cyber Food\"")
                 ));
     }
 }
