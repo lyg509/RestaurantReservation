@@ -1,6 +1,8 @@
 package com.lyg.eatgo.interfaces;
 
 
+import com.lyg.eatgo.domain.MenuItemRepository;
+import com.lyg.eatgo.domain.MenuItemRepositoryImpl;
 import com.lyg.eatgo.domain.RestaurantRepository;
 import com.lyg.eatgo.domain.RestaurantRepositoryImpl;
 import org.junit.jupiter.api.Test;
@@ -25,6 +27,9 @@ public class RestaurantControllerTest {
 
     @SpyBean(RestaurantRepositoryImpl.class)
     private RestaurantRepository restaurantRepository;
+
+    @SpyBean(MenuItemRepositoryImpl.class)
+    private MenuItemRepository menuItemRepository;
 
     @Test
     public void list() throws Exception {
@@ -57,6 +62,10 @@ public class RestaurantControllerTest {
                 ))
                 .andExpect(content().string(
                         containsString("\"name\":\"Cyber Food\"")
+                ))
+                //메뉴 추가
+                .andExpect(content().string(
+                        containsString("Kimchi")
                 ));
     }
 }
