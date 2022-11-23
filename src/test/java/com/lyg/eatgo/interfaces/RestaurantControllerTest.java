@@ -1,6 +1,7 @@
 package com.lyg.eatgo.interfaces;
 
 
+import com.lyg.eatgo.application.RestaurantService;
 import com.lyg.eatgo.domain.MenuItemRepository;
 import com.lyg.eatgo.domain.MenuItemRepositoryImpl;
 import com.lyg.eatgo.domain.RestaurantRepository;
@@ -24,6 +25,9 @@ public class RestaurantControllerTest {
 
     @Autowired
     private MockMvc mvc;
+
+    @SpyBean(RestaurantService.class)
+    private RestaurantService restaurantService;
 
     @SpyBean(RestaurantRepositoryImpl.class)
     private RestaurantRepository restaurantRepository;
