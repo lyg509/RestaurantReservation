@@ -2,19 +2,21 @@ package com.lyg.eatgo.interfaces;
 
 
 import com.lyg.eatgo.application.RestaurantService;
-import com.lyg.eatgo.domain.MenuItemRepository;
-import com.lyg.eatgo.domain.MenuItemRepositoryImpl;
-import com.lyg.eatgo.domain.RestaurantRepository;
-import com.lyg.eatgo.domain.RestaurantRepositoryImpl;
+import com.lyg.eatgo.domain.*;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.hamcrest.Matchers.containsString;
+import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -26,7 +28,7 @@ public class RestaurantControllerTest {
     @Autowired
     private MockMvc mvc;
 
-    @SpyBean(RestaurantService.class)
+    @MockBean
     private RestaurantService restaurantService;
 
     @SpyBean(RestaurantRepositoryImpl.class)
@@ -37,6 +39,9 @@ public class RestaurantControllerTest {
 
     @Test
     public void list() throws Exception {
+        List<Restaurant> restaurants = new ArrayList<>();
+        restaurants.add(new Restaurant(1004L, "Bob zip","Seoul"));
+        given(restaurantService.getRestaurants()).willReturn(restaurants);
         mvc.perform(get("/restaurants"))
                 .andExpect(status().isOk())
                 .andExpect(content().string(
@@ -50,6 +55,15 @@ public class RestaurantControllerTest {
     //가게 상세
     @Test
     public void detail() throws Exception {
+        Restaurant restaurant = new Restaurant(1004L, "Bob zip","Seoul");
+        restaurant.addMenuItem(new MenuItem("Kimchi"));
+
+        Restaurant restaurant2 = new Restaurant(2020L, "Cyber Food","Seoul");
+        restaurant.addMenuItem(new MenuItem("Kimchi"));
+
+        given(restaurantService.getRestaurant(1004L)).willReturn(restaurant);
+        given(restaurantService.getRestaurant(2020L)).willReturn(restaurant2);
+
         mvc.perform(get("/restaurants/1004"))
                 .andExpect(status().isOk())
                 .andExpect(content().string(
