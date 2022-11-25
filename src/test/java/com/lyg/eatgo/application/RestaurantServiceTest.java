@@ -1,18 +1,21 @@
 package com.lyg.eatgo.application;
 
-import com.lyg.eatgo.domain.*;
+import com.lyg.eatgo.domain.MenuItem;
+import com.lyg.eatgo.domain.MenuItemRepository;
+import com.lyg.eatgo.domain.Restaurant;
+import com.lyg.eatgo.domain.RestaurantRepository;
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
-
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-
 
 import java.util.ArrayList;
 import java.util.List;
 
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 
 
@@ -51,7 +54,7 @@ public class RestaurantServiceTest {
 
         given(restaurantRepository.findAll()).willReturn(restaurants);
 
-        given(restaurantRepository.findById(1004L)).willReturn(restaurant   );
+        given(restaurantRepository.findById(1004L)).willReturn(restaurant);
     }
 
     @Test
@@ -72,5 +75,17 @@ public class RestaurantServiceTest {
         MenuItem menuItem = restaurant.getMenuItems().get(0);
 
         assertThat(menuItem.getName(), is("Kimchi"));
+    }
+
+    @Test
+    public void addRestaurant() {
+        Restaurant  restaurant= new Restaurant("Beryong", "Busan");
+        Restaurant  saved= new Restaurant(1234L,"Beryong", "Busan");
+
+        given(restaurantRepository.save(any())).willReturn(saved);
+
+        Restaurant created = restaurantService.addRestaurant(restaurant);
+
+        assertThat(created.getId(),is(1234L));
     }
 }
