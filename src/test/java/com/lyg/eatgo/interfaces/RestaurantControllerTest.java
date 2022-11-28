@@ -34,11 +34,11 @@ public class RestaurantControllerTest {
     @MockBean
     private RestaurantService restaurantService;
 
-    @SpyBean(RestaurantRepositoryImpl.class)
-    private RestaurantRepository restaurantRepository;
+   /* @SpyBean(RestaurantRepositoryImpl.class)
+    private RestaurantRepository restaurantRepository;*/
 
-    @SpyBean(MenuItemRepositoryImpl.class)
-    private MenuItemRepository menuItemRepository;
+    /*@SpyBean(MenuItemRepositoryImpl.class)
+    private MenuItemRepository menuItemRepository;*/
 
     @Test
     public void list() throws Exception {

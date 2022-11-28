@@ -11,6 +11,7 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -39,14 +40,6 @@ public class RestaurantServiceTest {
                 restaurantRepository, menuItemRepository);
     }
 
-    private void mockMenuItemRepository() {
-
-        List<MenuItem> menuItems = new ArrayList<>();
-        menuItems.add(new MenuItem("Kimchi"));
-
-        given(menuItemRepository.findAllByRestaurantId(1004L)).willReturn(menuItems);
-    }
-
     private void mockRestaurantRepository() {
         List<Restaurant> restaurants = new ArrayList<>();
         Restaurant restaurant = new Restaurant(1004L, "Bob zip", "Seoul");
@@ -54,7 +47,16 @@ public class RestaurantServiceTest {
 
         given(restaurantRepository.findAll()).willReturn(restaurants);
 
-        given(restaurantRepository.findById(1004L)).willReturn(restaurant);
+        given(restaurantRepository.findById(1004L))
+                .willReturn(Optional.of(restaurant));
+    }
+
+    private void mockMenuItemRepository() {
+
+        List<MenuItem> menuItems = new ArrayList<>();
+        menuItems.add(new MenuItem("Kimchi"));
+
+        given(menuItemRepository.findAllByRestaurantId(1004L)).willReturn(menuItems);
     }
 
     @Test
