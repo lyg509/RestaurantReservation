@@ -4,8 +4,9 @@ import com.lyg.eatgo.domain.MenuItem;
 import com.lyg.eatgo.domain.MenuItemRepository;
 import com.lyg.eatgo.domain.Restaurant;
 import com.lyg.eatgo.domain.RestaurantRepository;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
@@ -22,6 +23,7 @@ import static org.mockito.BDDMockito.given;
 
 public class RestaurantServiceTest {
 
+    @InjectMocks
     private RestaurantService restaurantService;
 
     @Mock
@@ -30,14 +32,11 @@ public class RestaurantServiceTest {
     @Mock
     private MenuItemRepository menuItemRepository;
 
-    @Before
+    @BeforeEach
     public void setUp() {
-        MockitoAnnotations.openMocks(this);
-
+        MockitoAnnotations.initMocks(this);
         mockRestaurantRepository();
         mockMenuItemRepository();
-        restaurantService = new RestaurantService(
-                restaurantRepository, menuItemRepository);
     }
 
     private void mockRestaurantRepository() {
@@ -89,5 +88,19 @@ public class RestaurantServiceTest {
         Restaurant created = restaurantService.addRestaurant(restaurant);
 
         assertThat(created.getId(),is(1234L));
+    }
+
+    //update
+    @Test
+    public void updateRestaurant() {
+        Restaurant restaurant = new Restaurant(1004L,"Bob zip", "Seoul");
+
+        given(restaurantRepository.findById(1004L))
+                .willReturn(Optional.of(restaurant));
+
+        restaurantService.updateRestaurant(1004L, "TestName","Test Address");
+
+        assertThat(restaurant.getName(), is("TestName"));
+        assertThat(restaurant.getAddress(), is("Test Address"));
     }
 }

@@ -22,6 +22,7 @@ import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 
 @RunWith(SpringRunner.class)    //스프링을 이용해서 테스트
 @WebMvcTest(RestaurantController.class) //특정 controller를 테스트
@@ -100,5 +101,16 @@ public class RestaurantControllerTest {
 
         verify(restaurantService).addRestaurant(any());
 
+    }
+
+    //가게 수정
+    @Test
+    public void update() throws Exception {
+        mvc.perform(patch("/restaurants/1004")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(" {\"name\":\"Test\",\"address\":\"Busan\"}"))
+                .andExpect(status().isOk());
+
+        verify(restaurantService).updateRestaurant(1004L,"Test","Busan");
     }
 }
