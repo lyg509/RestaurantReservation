@@ -1,9 +1,7 @@
 package com.lyg.eatgo.application;
 
-import com.lyg.eatgo.domain.MenuItem;
-import com.lyg.eatgo.domain.MenuItemRepository;
-import com.lyg.eatgo.domain.Restaurant;
-import com.lyg.eatgo.domain.RestaurantRepository;
+import com.lyg.eatgo.domain.*;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -19,7 +17,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
-
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class RestaurantServiceTest {
 
@@ -75,7 +73,7 @@ public class RestaurantServiceTest {
     }
 
     @Test
-    public void getRestaurant() {
+    public void getRestaurantWithExisted() {
         Restaurant restaurant = restaurantService.getRestaurant(1004L);
 
         assertThat(restaurant.getId(), is(1004L));
@@ -83,6 +81,13 @@ public class RestaurantServiceTest {
         MenuItem menuItem = restaurant.getMenuItems().get(0);
 
         assertThat(menuItem.getName(), is("Kimchi"));
+    }
+
+    @Test
+    public void getRestaurantWithNotExisted() {
+        assertThatThrownBy(()-> {
+            restaurantService.getRestaurant(404L);
+        }).isInstanceOf(RestaurantNotFoundException.class);
     }
 
     @Test

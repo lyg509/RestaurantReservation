@@ -3,13 +3,14 @@ package com.lyg.eatgo.interfaces;
 
 import com.lyg.eatgo.application.RestaurantService;
 import com.lyg.eatgo.domain.*;
+
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.junit4.SpringRunner;
+
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.ArrayList;
@@ -25,7 +26,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 
-@RunWith(SpringRunner.class)    //스프링을 이용해서 테스트
+
+//@RunWith(SpringRunner.class)  //스프링을 이용해서 테스트
 @WebMvcTest(RestaurantController.class) //특정 controller를 테스트
 public class RestaurantControllerTest {
 
@@ -58,7 +60,7 @@ public class RestaurantControllerTest {
 
     //가게 상세
     @Test
-    public void detail() throws Exception {
+    public void detailWithExisted() throws Exception {
         Restaurant restaurant = Restaurant.builder()
                 .id(1004L)
                 .name("Bob zip")
@@ -103,6 +105,16 @@ public class RestaurantControllerTest {
                         containsString("\"name\":\"Cyber Food\"")
                 ));
 
+    }
+
+    @Test
+    public void detailWithNotExisted() throws Exception {
+        given(restaurantService.getRestaurant(404L))
+                .willThrow( new RestaurantNotFoundException(404L));
+
+        mvc.perform(get("/restaurants/404"))
+                .andExpect(status().isNotFound())
+                .andExpect(content().string("{}"));
     }
 
     @Test
