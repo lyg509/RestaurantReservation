@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.lyg.eatgo.application.ReviewServiceTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-12-14T08:13:41" hostname="DESKTOP-E38CFI3" time="0.293">
+  <properties/>
+  <testcase name="getReviews()" classname="com.lyg.eatgo.application.ReviewServiceTest" time="0.293"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

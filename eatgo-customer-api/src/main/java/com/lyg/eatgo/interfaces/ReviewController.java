@@ -1,4 +1,4 @@
-package eatgo.interfaces;
+package com.lyg.eatgo.interfaces;
 
 import com.lyg.eatgo.application.ReviewService;
 import com.lyg.eatgo.domain.Review;

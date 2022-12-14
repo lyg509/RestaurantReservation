@@ -1,4 +1,4 @@
-package eatgo.interfaces;
+package com.lyg.eatgo.interfaces;
 
 import com.lyg.eatgo.domain.RestaurantNotFoundException;
 import org.springframework.http.HttpStatus;

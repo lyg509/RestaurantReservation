@@ -1,7 +1,7 @@
 package com.lyg.eatgo.application;
 
+import com.lyg.eatgo.application.RestaurantService;
 import com.lyg.eatgo.domain.*;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -12,13 +12,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.verify;
 
 public class RestaurantServiceTest {

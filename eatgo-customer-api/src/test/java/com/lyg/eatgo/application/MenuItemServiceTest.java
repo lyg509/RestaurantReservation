@@ -1,5 +1,6 @@
 package com.lyg.eatgo.application;
 
+import com.lyg.eatgo.application.MenuItemService;
 import com.lyg.eatgo.domain.MenuItem;
 import com.lyg.eatgo.domain.MenuItemRepository;
 import org.junit.jupiter.api.BeforeEach;

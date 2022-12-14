@@ -5,6 +5,8 @@ import com.lyg.eatgo.domain.Review;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ReviewService {
 
@@ -15,8 +17,7 @@ public class ReviewService {
         this.reviewRepository = reViewRepository;
     }
 
-    public Review addReview(Long restaurantId, Review review) {
-        review.setRestaurantId(restaurantId);
-        return reviewRepository.save(review);
+    public List<Review> getReviews() {
+        return reviewRepository.findAll();
     }
 }

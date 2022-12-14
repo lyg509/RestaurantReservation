@@ -7,7 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 
 @SpringBootTest
-public class EatgoApplicationTest {
+public class EatgoAdminApiApplicationTest {
     @Test
     public void contextLoads() {
 

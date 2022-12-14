@@ -88,13 +88,6 @@ public class RestaurantControllerTest {
                 ))
                 .andExpect(content().string(
                         containsString("\"name\":\"Bob zip\"")
-                ))
-                //메뉴 추가
-                .andExpect(content().string(
-                        containsString("Kimchi")
-                ))
-                .andExpect(content().string(
-                        containsString("great")
                 ));
     }
 

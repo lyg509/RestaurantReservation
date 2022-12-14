@@ -1,10 +1,12 @@
 package com.lyg.eatgo.application;
 
+
 import com.lyg.eatgo.domain.MenuItem;
 import com.lyg.eatgo.domain.MenuItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -31,5 +33,9 @@ public class MenuItemService {
         }
         menuItem.setRestaurantId(restaurantId);
         menuItemRepository.save(menuItem);
+    }
+
+    public List<MenuItem> getMenuItems(long restaurantId) {
+        return  menuItemRepository.findAllByRestaurantId(restaurantId);
     }
 }

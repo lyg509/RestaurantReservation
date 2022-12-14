@@ -1,4 +1,4 @@
-package eatgo.application;
+package com.lyg.eatgo.application;
 
 import com.lyg.eatgo.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;

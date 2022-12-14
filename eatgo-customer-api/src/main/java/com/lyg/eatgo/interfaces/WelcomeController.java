@@ -1,4 +1,4 @@
-package eatgo.interfaces;
+package com.lyg.eatgo.interfaces;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
