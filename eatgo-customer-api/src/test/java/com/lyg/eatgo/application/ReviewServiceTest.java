@@ -21,7 +21,7 @@ class ReviewServiceTest {
     @BeforeEach
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        //reviewService = new ReviewService();
+        reviewService = new ReviewService(reViewRepository);
     }
 
     @Test
